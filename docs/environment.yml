@@ -18,8 +18,6 @@ dependencies:
 # doc dependencies
 - sphinx
 - numpydoc
-- nbsphinx
-- pandoc
 - ipython
 - sphinx-book-theme
 - myst-nb
