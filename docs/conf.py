@@ -10,9 +10,6 @@
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
 import os
-import pathlib
-import shutil
-import subprocess
 import sys
 
 sys.path.insert(0, os.path.abspath("../"))
@@ -35,7 +32,7 @@ version = geoplanar.__version__
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ["sphinx.ext.autodoc", "numpydoc", "nbsphinx"]
+extensions = ["sphinx.ext.autodoc", "numpydoc", "nbsphinx", "myst_nb"]
 
 # nbsphinx do not use requirejs (breaks bootstrap)
 nbsphinx_requirejs_path = ""
@@ -54,7 +51,7 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = "pydata_sphinx_theme"
+html_theme = "sphinx_book_theme"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -65,31 +62,6 @@ html_css_files = [
     "css/custom.css",
 ]
 
-html_sidebars = {
-    "**": ["docs-sidebar.html"],
-}
+html_sidebars = {}
 
-# ---------------------------------------------------------------------------
-
-# Copy notebooks into the docs/ directory so sphinx sees them
-
-HERE = pathlib.Path(os.path.abspath(os.path.dirname(__file__)))
-
-
-files_to_copy = [
-    "notebooks/overlaps.ipynb",
-    "notebooks/gaps.ipynb",
-    "notebooks/holes.ipynb",
-    "notebooks/nonplanaredges.ipynb",
-    "notebooks/nonplanartouches.ipynb",
-    "notebooks/usmex.ipynb",
-]
-
-
-for filename in files_to_copy:
-    shutil.copy(HERE / ".." / filename, HERE)
-
-
-# convert README to rst
-
-subprocess.check_output(["pandoc", "--to", "rst", "-o", "README.rst", "../README.md"])
+nb_execution_mode = "off"
