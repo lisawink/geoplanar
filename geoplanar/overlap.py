@@ -62,9 +62,9 @@ def trim_overlaps(gdf, strategy='largest', inplace=False):
 
     """
     if GPD_GE_014:
-        intersections = gdf.sindex.query(gdf.geometry, predicate="intersects").T
+        intersections = gdf.sindex.query(gdf.geometry, predicate="overlaps").T
     else:
-        intersections = gdf.sindex.query_bulk(gdf.geometry, predicate="intersects").T
+        intersections = gdf.sindex.query_bulk(gdf.geometry, predicate="overlaps").T
 
     if not inplace:
         gdf = gdf.copy()
