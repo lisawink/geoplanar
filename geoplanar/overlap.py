@@ -227,7 +227,7 @@ def merge_touching(gdf, index, largest=None):
     GeoDataFrame
     """
 
-    merge_gdf = gdf.loc[index]
+    merge_gdf = gdf.iloc[index]
 
     if GPD_GE_014:
         source, target = gdf.boundary.sindex.query(
@@ -249,7 +249,7 @@ def merge_touching(gdf, index, largest=None):
                 if largest is None:
                     neighbors[i] = [target[source == i][0]]
                 else:
-                    sub = gdf.geometry.loc[target[source == i]]
+                    sub = gdf.geometry.iloc[target[source == i]]
                     inters = sub.intersection(poly.exterior)
                     if largest:
                         neighbors[i] = [inters.length.idxmax()]
